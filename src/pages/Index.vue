@@ -18,11 +18,8 @@
               <q-btn color="primary" icon="mdi-facebook-box" label="Entrar com Facebook" />
               <br>
               <q-btn color="red-5" icon="mdi-google" label="Entrar com Google" />
-<<<<<<< HEAD
               <p> cara, já falei que sou bonito </p>
-=======
               <p> Pedro não é merecedor de nada </p>
->>>>>>> d24d89d60f8eef85e82c08417e1c1d0b61ea1f69
           </div>
         </q-page>
       </q-page-container>
