@@ -10,7 +10,6 @@
               <q-input v-model="user.password" type="password" inverted-light color="white" float-label="Password" />
               <br>
               <q-btn color="indigo-10" label="Entrar"/>
-              <p> teste </p>
               <br>
               <q-btn color="primary" label="Cadastre-se" to='register'/>
               <br>
@@ -19,9 +18,6 @@
               <q-btn color="primary" icon="mdi-facebook-box" label="Entrar com Facebook" />
               <br>
               <q-btn color="red-5" icon="mdi-google" label="Entrar com Google" />
-              <p> cara, já falei que sou bonito </p>
-              <p> Pedro não é merecedor de nada </p>
-              <p> Teste 2 </p>
           </div>
         </q-page>
       </q-page-container>
