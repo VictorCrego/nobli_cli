@@ -18,6 +18,7 @@
               <q-btn color="primary" icon="mdi-facebook-box" label="Entrar com Facebook" />
               <br>
               <q-btn color="red-5" icon="mdi-google" label="Entrar com Google" />
+              <p> Pedro não é merecedor de nada </p>
           </div>
         </q-page>
       </q-page-container>
