@@ -10,6 +10,7 @@
               <q-input v-model="user.password" type="password" inverted-light color="white" float-label="Password" />
               <br>
               <q-btn color="indigo-10" label="Entrar"/>
+              <p> teste </p>
               <br>
               <q-btn color="primary" label="Cadastre-se" to='register'/>
               <br>
