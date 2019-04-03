@@ -18,6 +18,7 @@
               <q-btn color="primary" icon="mdi-facebook-box" label="Entrar com Facebook" />
               <br>
               <q-btn color="red-5" icon="mdi-google" label="Entrar com Google" />
+              <p> Pedro é um cara sem muitos propósitos de vida </p>
           </div>
         </q-page>
       </q-page-container>
