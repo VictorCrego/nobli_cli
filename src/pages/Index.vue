@@ -20,6 +20,7 @@
               <q-btn color="red-5" icon="mdi-google" label="Entrar com Google" />
               <p> cara, já falei que sou bonito </p>
               <p> Pedro não é merecedor de nada </p>
+              <p> Teste 2 </p>
           </div>
         </q-page>
       </q-page-container>
