@@ -18,7 +18,6 @@
               <q-btn color="primary" icon="mdi-facebook-box" label="Entrar com Facebook" />
               <br>
               <q-btn color="red-5" icon="mdi-google" label="Entrar com Google" />
-              <p> Pedro é um cara muito bonito e bem-sucedido </p>
           </div>
         </q-page>
       </q-page-container>
