@@ -9,7 +9,7 @@
               <br>
               <q-input v-model="user.password" type="password" inverted-light color="white" float-label="Password" />
               <br>
-              <q-btn color="indigo-10" label="Entrar"/>
+              <q-btn v-on:click="login" color="indigo-10" label="Entrar"/>
               <br>
               <q-btn color="primary" label="Cadastre-se" to='register'/>
               <br>
@@ -63,7 +63,26 @@ export default {
     }
   },
   methods: {
-    
+    login: function(event){
+      
+      event.stopPropagation();
+      event.preventDefault();
+      
+      var target = event.target;  
+      var email = this.user.email;
+      var password = this.user.password;
+
+      target.disabled = true;
+
+      firebase.auth().signInWithEmailAndPassword(email, password).then({
+        
+      }).catch(function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        window.alert("Error " + errorCode + " \n" + errorMessage);
+        target.disabled = false;
+      });
+    }
   }
 }
 </script>

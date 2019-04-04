@@ -1,0 +1,32 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+  	function isNotBlank(string){
+    	return !string.matches('^$|\\s*');
+    }
+  	function testEmailContent(email){
+    	return email != null &&
+             email.matches('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$')
+    }
+    
+    function testNameContent(name){
+    	return name != null &&
+      			 isNotBlank(name);
+    }
+    
+    function testDataFormat(data){
+      return testNameContent(data.name) &&
+      			 testEmailContent(data.email); 
+    }
+    
+    function testRequestPath(doc){
+    	return request.path == /databases/$(database)/documents/$(doc)/$(request.auth.uid)
+    }
+    
+    match /userData/{uid} {
+    
+      allow read: if testRequestPath("userData");
+      allow create: if testRequestPath("userData") 
+      								&& testDataFormat(request.resource.data);
+    }
+  }
+}
