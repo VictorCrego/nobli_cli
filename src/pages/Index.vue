@@ -74,8 +74,8 @@ export default {
 
       target.disabled = true;
 
-      firebase.auth().signInWithEmailAndPassword(email, password).then({
-        
+      firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
+        window.location.href = "/#/QrCodeScreen";
       }).catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;

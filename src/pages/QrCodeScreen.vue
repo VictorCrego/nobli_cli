@@ -3,7 +3,7 @@
   <q-layout-header class="no-shadow">
     <q-toolbar color="#D9D9D9">
       <q-btn flat round dense @click="showLeft = !showLeft" icon="menu" color="grey-8"/>
-      <q-toolbar-title class="q-pa-md row justify-center">
+      <q-toolbar-title class="q-pa-md row absolute-center">
         <img alt="Quasar logo" src="~assets/nobli-logo-mini.png">
       </q-toolbar-title>
     </q-toolbar>
