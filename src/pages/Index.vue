@@ -62,7 +62,7 @@ export default {
       }
     }
   },
-  mounted(){
+  created(){
     
       this.$nextTick(function(){
         var db = firebase.firestore();
@@ -82,12 +82,16 @@ export default {
               db.collection("userData").doc(user_id).set({
                   name: name,
                   email: email
+              }).then(function(){
+                window.location.href="/#/QrCodeScreen";
               }).catch(function(error){
                   var errorCode = error.code;
                   var errorMessage = error.message;
                   user.delete();
                   window.alert(errorCode + " " + errorMessage);
               });
+          }else{
+            window.location.href="/#/QrCodeScreen";
           }
         }).catch(function(error) {
             // Handle Errors here.
