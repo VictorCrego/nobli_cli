@@ -120,9 +120,12 @@ export default {
                           state: state,
                           city: city,
                           email: email
+                      }).then(function(){
+                        window.location.href = "/#/QrCodeScreen";
                       }).catch(function(error){
                           var errorCode = error.code;
                           var errorMessage = error.message;
+                          
                           user.delete();
                           window.alert("Error " + errorCode + " \n" + errorMessage);
 
