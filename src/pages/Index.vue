@@ -17,7 +17,7 @@
               <br>
               <q-btn color="primary" icon="mdi-facebook-box" label="Entrar com Facebook" />
               <br>
-              <q-btn color="red-5" icon="mdi-google" label="Entrar com Google" />
+              <q-btn v-on:click="logingg" color="red-5" icon="mdi-google" label="Entrar com Google" />
           </div>
         </q-page>
       </q-page-container>
@@ -62,6 +62,55 @@ export default {
       }
     }
   },
+  mounted(){
+    
+      this.$nextTick(function(){
+        var db = firebase.firestore();
+
+        firebase.auth().getRedirectResult().then(function(result) {
+          var user = firebase.auth().currentUser;
+          var login_creation = user.metadata.creationTime;
+          var last_login = user.metadata.lastSignInTime;
+          var is_first_login = login_creation === last_login;
+          
+          if(is_first_login === true){
+
+              var user_id = user.uid;
+              var email = user.email;
+              var name = user.displayName
+
+              db.collection("userData").doc(user_id).set({
+                  name: name,
+                  email: email
+              }).catch(function(error){
+                  var errorCode = error.code;
+                  var errorMessage = error.message;
+                  user.delete();
+                  window.alert(errorCode + " " + errorMessage);
+              });
+          }
+        }).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            // ...
+            var user = firebase.auth().currentUser;
+            var login_creation = user.metadata.creationTime;
+            var last_login = user.metadata.lastSignInTime;
+            var is_first_login = login_creation === last_login;
+
+            if(is_first_login === true){
+              user.delete();
+            }
+
+            window.alert(errorCode + " " + errorMessage + " " + error.credential);
+        });
+      });
+  },
   methods: {
     login: function(event){
       
@@ -82,7 +131,18 @@ export default {
         window.alert("Error " + errorCode + " \n" + errorMessage);
         target.disabled = false;
       });
+    },
+    logingg: function(event){      
+      event.stopPropagation();
+      event.preventDefault();
+
+      var target = event.target;
+      var provider = new firebase.auth.GoogleAuthProvider();
+
+      target.disabled = true;
+      
+      firebase.auth().signInWithRedirect(provider);
     }
   }
-}
+};
 </script>
