@@ -66,6 +66,19 @@ export default {
     return {
       showLeft: false
     }
+  },
+  created(){
+    this.$nextTick(function(){
+      firebase.auth().onAuthStateChanged(function(user){
+        if(user){
+          console.log("User");
+        }else{
+          console.log("no user!");
+          window.location.href = "/#/";
+        }
+        console.log("after if");
+      });
+    });
   }
 }
 
