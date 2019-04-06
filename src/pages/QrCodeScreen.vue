@@ -71,6 +71,7 @@ export default {
   methods:{
     signOut: function(){
       firebase.auth().signOut();
+      firebase.app().delete();
     }
   },
   created(){
