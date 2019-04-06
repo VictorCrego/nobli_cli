@@ -53,7 +53,9 @@ module.exports = function (ctx) {
         'QItemMain',
         'QItemSide',
         'QLayoutFooter',
-        'QPageSticky'
+        'QPageSticky',
+        'QInnerLoading',
+        'QSpinnerMat'
       ],
       directives: [
         'Ripple'

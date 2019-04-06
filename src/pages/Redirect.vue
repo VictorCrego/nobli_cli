@@ -1,4 +1,14 @@
 <template>
+  <q-layout>
+    <q-page-container>
+        <q-page class="principal column items-center justify-center">
+            <div>
+                <q-spinner-mat size="150" style="color: #027BE3FF"/>
+            </div>
+            <p>Loading...</p>
+        </q-page>
+    </q-page-container>
+  </q-layout>
 </template>
 
 <style>
@@ -28,12 +38,11 @@ export default {
             }else{            
                 user.isNewUser = result.additionalUserInfo.isNewUser;
             }
-
             return user;
 
         }).then(function (user){
             if(user == null) return;
-            
+
             if(user.isNewUser){
                 var db = firebase.firestore();
                 var user_id = user.uid;
