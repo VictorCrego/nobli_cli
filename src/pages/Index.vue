@@ -62,58 +62,12 @@ export default {
       }
     }
   },
-  created(){
-    
-      this.$nextTick(function(){
-        var db = firebase.firestore();
-
-        firebase.auth().getRedirectResult().then(function(result) {
-          var user = firebase.auth().currentUser;
-          var login_creation = user.metadata.creationTime;
-          var last_login = user.metadata.lastSignInTime;
-          var is_first_login = login_creation === last_login;
-          
-          if(is_first_login === true){
-
-              var user_id = user.uid;
-              var email = user.email;
-              var name = user.displayName
-
-              db.collection("userData").doc(user_id).set({
-                  name: name,
-                  email: email
-              }).then(function(){
-                window.location.href="/#/QrCodeScreen";
-              }).catch(function(error){
-                  var errorCode = error.code;
-                  var errorMessage = error.message;
-                  user.delete();
-                  window.alert(errorCode + " " + errorMessage);
-              });
-          }else{
-            window.location.href="/#/QrCodeScreen";
-          }
-        }).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // The email of the user's account used.
-            var email = error.email;
-            // The firebase.auth.AuthCredential type that was used.
-            var credential = error.credential;
-            // ...
-            var user = firebase.auth().currentUser;
-            var login_creation = user.metadata.creationTime;
-            var last_login = user.metadata.lastSignInTime;
-            var is_first_login = login_creation === last_login;
-
-            if(is_first_login === true){
-              user.delete();
-            }
-
-            window.alert(errorCode + " " + errorMessage + " " + error.credential);
-        });
-      });
+  mounted(){
+    firebase.auth().onAuthStateChanged(function(user){
+      if(user == null){
+        window.location.href = "/#/";
+      }
+    });
   },
   methods: {
     login: function(event){
@@ -136,16 +90,8 @@ export default {
         target.disabled = false;
       });
     },
-    logingg: function(event){      
-      event.stopPropagation();
-      event.preventDefault();
-
-      var target = event.target;
-      var provider = new firebase.auth.GoogleAuthProvider();
-
-      target.disabled = true;
-      
-      firebase.auth().signInWithRedirect(provider);
+    logingg: function(event){
+        window.location.href = "/#/Redirect";
     }
   }
 };

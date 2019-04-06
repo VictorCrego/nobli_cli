@@ -1,6 +1,7 @@
 import QrCodeScreen from 'pages/QrCodeScreen'
 import RegisterPage from 'pages/Register'
 import IndexPage from 'pages/Index'
+import Redirect from 'pages/Redirect'
 
 const routes = [
   {
@@ -17,6 +18,11 @@ const routes = [
     path: '/qrcodescreen',
     name: 'qrcodescreen',
     component: QrCodeScreen
+  },
+  {
+    path: '/redirect',
+    name: 'redirect',
+    component: Redirect
   }
 ]
 
