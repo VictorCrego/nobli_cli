@@ -88,6 +88,7 @@ export default {
     register: function(event){
             if (this.pwconfirm === this.password){
               var db = firebase.firestore();
+              var $this = this;
         
               event.stopPropagation();
               event.preventDefault();
@@ -150,7 +151,7 @@ export default {
                 var errorMessage = error.message;
 
                 target.disabled = false;
-                this.registering = false;
+                $this.registering = false;
 
                 window.alert("Error " + errorCode + " \n" + errorMessage);
               });

@@ -81,6 +81,8 @@ export default {
     firebase.auth().onAuthStateChanged(function(user){
       if(user == null){
         window.location.href = "/#/";
+      }else{
+        window.location.href = "/#/QrCodeScreen";
       }
     });
   },
