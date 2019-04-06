@@ -63,11 +63,26 @@ export default {
         address2:"",
         email: "",
         password: "",
-        pwconfirm: ""
+        pwconfirm: "",
+        registering: false
     }
   },
   validations: {
     email: { required, email }
+  },
+  mounted: function(){
+    let $this = this;
+
+    firebase.auth().onAuthStateChanged(function(user){
+        if(user && !$this.registering){
+          console.log("User already logged in! Registering: " + $this.registering); 
+          window.location.href = "/#/";
+        }else if (user && $this.registering){
+          window.location.href = "/#/QrCodeScreen";
+        }else{
+          console.log("nothing to do. Registering: " + $this.registering);
+        }
+    });
   },
   methods: {
     register: function(event){
@@ -89,48 +104,55 @@ export default {
               var state = this.state;
               var city = this.city;
 
+              target.disabled = true;                
+              this.registering = true;
 
-              target.disabled = true;
+              console.log("registering: " + this.registering);
 
-              firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-                  var errorCode = error.code;
-                  var errorMessage = error.message;
-                  window.alert("Error " + errorCode + " \n" + errorMessage);
-                  target.disabled = false;
+              firebase.auth().createUserWithEmailAndPassword(email, password).then(function(){
 
-              }).then(function(){
-
-                  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+                firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
+                    var user = firebase.auth().currentUser;
+                    var user_id = user.uid;
+                    
+                    db.collection("userData").doc(user_id).set({
+                      name: name,
+                      doc: doc,
+                      pcode: pcode,
+                      address: address,
+                      number: number,
+                      address2: address2,
+                      state: state,
+                      city: city,
+                      email: email
+                    }).catch(function(error){
                       var errorCode = error.code;
                       var errorMessage = error.message;
-                      window.alert("Error " + errorCode + " \n" + errorMessage);
-                      target.disabled = false;
-
-                  }).then(function(){
-                      var user = firebase.auth().currentUser;
-                      var user_id = user.uid;
                       
-                      db.collection("userData").doc(user_id).set({
-                          name: name,
-                          doc: doc,
-                          pcode: pcode,
-                          address: address,
-                          number: number,
-                          address2: address2,
-                          state: state,
-                          city: city,
-                          email: email
-                      }).then(function(){
-                        window.location.href = "/#/QrCodeScreen";
-                      }).catch(function(error){
-                          var errorCode = error.code;
-                          var errorMessage = error.message;
-                          
-                          user.delete();
-                          window.alert("Error " + errorCode + " \n" + errorMessage);
+                      user.delete();
+                      target.disabled = false;
+                      this.registering = false;
+                      
+                      window.alert("Error " + errorCode + " \n" + errorMessage + "\nSou eu!");
+                    });
+                  }).catch(function(error) {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                        
+                    user.delete();
+                    target.disabled = false;
+                    this.registering = false;
 
-                      });
+                    window.alert("Error " + errorCode + " \n" + errorMessage + "\nSou eu de baixo!");
                   });
+              }).catch(function(error) {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+
+                target.disabled = false;
+                this.registering = false;
+
+                window.alert("Error " + errorCode + " \n" + errorMessage);
               });
             }
     }

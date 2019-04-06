@@ -78,12 +78,11 @@ export default {
     this.$nextTick(function(){
       firebase.auth().onAuthStateChanged(function(user){
         if(user){
-          console.log("User");
+          console.log("User logged in!");
         }else{
-          console.log("no user!");
+          console.log("User not logged in!");
           window.location.href = "/#/";
         }
-        console.log("after if");
       });
     });
   }
