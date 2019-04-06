@@ -6,6 +6,7 @@
       <q-toolbar-title class="q-pa-md row absolute-center">
         <img alt="Quasar logo" src="~assets/nobli-logo-mini.png">
       </q-toolbar-title>
+      <q-btn class="absolute-right" flat round dense @click="signOut" icon="logout" color="grey-8"/>
     </q-toolbar>
   </q-layout-header>
 
@@ -65,6 +66,11 @@ export default {
   data: function() {
     return {
       showLeft: false
+    }
+  },
+  methods:{
+    signOut: function(){
+      firebase.auth().signOut();
     }
   },
   created(){
