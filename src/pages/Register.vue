@@ -63,24 +63,16 @@ export default {
         address2:"",
         email: "",
         password: "",
-        pwconfirm: "",
-        registering: false
+        pwconfirm: ""
     }
   },
   validations: {
     email: { required, email }
   },
   mounted: function(){
-    let $this = this;
-
     firebase.auth().onAuthStateChanged(function(user){
-        if(user && !$this.registering){
-          console.log("User already logged in! Registering: " + $this.registering); 
-          window.location.href = "/#/";
-        }else if (user && $this.registering){
+        if(user){
           window.location.href = "/#/QrCodeScreen";
-        }else{
-          console.log("nothing to do. Registering: " + $this.registering);
         }
     });
   },
@@ -105,10 +97,7 @@ export default {
               var state = this.state;
               var city = this.city;
 
-              target.disabled = true;                
-              this.registering = true;
-
-              console.log("registering: " + this.registering);
+              target.disabled = true;
 
               firebase.auth().createUserWithEmailAndPassword(email, password).then(function(){
 
@@ -132,7 +121,6 @@ export default {
                       
                       user.delete();
                       target.disabled = false;
-                      this.registering = false;
                       
                       window.alert("Error " + errorCode + " \n" + errorMessage + "\nSou eu!");
                     });
@@ -142,7 +130,6 @@ export default {
                         
                     user.delete();
                     target.disabled = false;
-                    this.registering = false;
 
                     window.alert("Error " + errorCode + " \n" + errorMessage + "\nSou eu de baixo!");
                   });
@@ -151,7 +138,6 @@ export default {
                 var errorMessage = error.message;
 
                 target.disabled = false;
-                $this.registering = false;
 
                 window.alert("Error " + errorCode + " \n" + errorMessage);
               });

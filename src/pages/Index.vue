@@ -11,7 +11,7 @@
               <br>
               <q-btn v-on:click="login" color="indigo-10" label="Entrar"/>
               <br>
-              <q-btn color="primary" label="Cadastre-se" to='register'/>
+              <q-btn color="primary" label="Cadastre-se" to='Register'/>
               <br>
               <div class="separator">ou</div>
               <br>

@@ -75,15 +75,10 @@ export default {
     }
   },
   created(){
-    this.$nextTick(function(){
-      firebase.auth().onAuthStateChanged(function(user){
-        if(user){
-          console.log("User logged in!");
-        }else{
-          console.log("User not logged in!");
-          window.location.href = "/#/";
-        }
-      });
+    firebase.auth().onAuthStateChanged(function(user){
+      if(!user){
+        window.location.href = "/#/";
+      }
     });
   }
 }
