@@ -35,18 +35,19 @@
 
   <!-- sub-routes get injected here: -->
   <q-page-container>
-      <p id="textoConecte">Conecte-se!</p>
-      <q-btn size="105pt" dense icon="mdi-qrcode-scan" class="no-shadow"/>
+      <!--<p id="textoConecte">Conecte-se!</p>
+      <q-btn size="105pt" dense icon="mdi-qrcode-scan" class="no-shadow"/>-->
   </q-page-container>
 
   <!-- Footer -->
   <q-layout-footer class="no-shadow">
     <q-toolbar-title class="q-pa-md row justify-center">
-      <q-btn flat size="45pt" dense icon="mdi-map-marker" class="no-shadow" color="deep-purple-10"/>
+      <q-btn size="45pt" dense icon="mdi-qrcode-scan" class="no-shadow"/>
     </q-toolbar-title>
   </q-layout-footer>
 </q-layout>
 </template>
+
 
 <style>
   .page{
