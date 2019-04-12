@@ -77,7 +77,7 @@ export default {
   created(){
     firebase.auth().onAuthStateChanged(function(user){
       if(!user){
-        //window.location.href = "/#/";
+        window.location.href = "/#/";
       }
     });
   }

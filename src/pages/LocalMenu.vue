@@ -1,5 +1,5 @@
 <template>
-<q-layout view="hHr lPr lFf" class="page row items-center justify-center">
+<q-layout view="hHr lpr lFf" class="page row items-center justify-center">
   <q-layout-header class="no-shadow q-pa-lg">
     <q-toolbar color="#D9D9D9">
       <q-btn flat round dense @click="showLeft = !showLeft" icon="menu" color="grey-8"/>
@@ -35,15 +35,33 @@
 
   <!-- sub-routes get injected here: -->
   <q-page-container>
-      <!--<p id="textoConecte">Conecte-se!</p>
-      <q-btn size="105pt" dense icon="mdi-qrcode-scan" class="no-shadow"/>-->
+    <div @click="clickShowFestas">
+      <img class="q-pa-md" src="../assets/showfestas.png">
+    </div>
+    <div @click="clickBaresRestaurantes">
+      <img class="q-pa-md" src="../assets/baresrestaurantes.png">
+    </div>
   </q-page-container>
 
   <!-- Footer -->
   <q-layout-footer class="no-shadow">
-    <q-toolbar-title class="q-pa-md row justify-center">
-      <q-btn size="45pt" dense icon="mdi-qrcode-scan" class="no-shadow"/>
+    
+    <q-toolbar-title class="row items-center justify-center">
+
+      <div class="q-ml-md fixed-bottom-left column">
+        <q-btn flat size="15pt" dense icon="mdi-home" class="no-shadow" color="secondary" to='QrCodeScreen'/>
+        <p class="ButtonTitle" align="center">Início</p>
+      </div>
+
+      <q-btn size="45pt" dense icon="mdi-qrcode-scan" class="no-shadow" to=''/>
+
+      <div class="q-mr-md fixed-bottom-right column">
+        <q-btn disable flat size="15pt" dense icon="mdi-map-marker" class="no-shadow" color="light" to=''/>
+        <p class="ButtonTitle" align="center">Local</p>
+      </div>
+
     </q-toolbar-title>
+
   </q-layout-footer>
 </q-layout>
 </template>
@@ -53,12 +71,10 @@
   .page{
     background-color: #D9D9D9;
   }
-  #textoConecte{
-    text-align: center;
-    font-size: 20pt;
-    color:#2f5597;
-    font-weight: bold;
+  .ButtonTitle{
+    font-size: 10px;
   }
+
 </style>
 
 <script>
@@ -70,6 +86,13 @@ export default {
     }
   },
   methods:{
+    clickShowFestas() {
+       window.location.href = "/#/";
+    },
+    clickBaresRestaurantes() {
+       window.location.href = "/#/";
+    },
+
     signOut: function(){
       firebase.auth().signOut();
       firebase.app().delete();
