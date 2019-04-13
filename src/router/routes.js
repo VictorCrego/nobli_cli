@@ -1,6 +1,7 @@
-import QrCodeScreen from 'pages/QrCodeScreen'
-import RegisterPage from 'pages/Register'
 import IndexPage from 'pages/Index'
+import RegisterPage from 'pages/Register'
+import QrCodeScreen from 'pages/QrCodeScreen'
+import LocalMenuPage from 'pages/LocalMenu'
 import Redirect from 'pages/Redirect'
 
 const routes = [
@@ -18,6 +19,11 @@ const routes = [
     path: '/qrcodescreen',
     name: 'qrcodescreen',
     component: QrCodeScreen
+  },
+  {
+    path: '/localmenu',
+    name: 'localmenu',
+    component: LocalMenuPage
   },
   {
     path: '/redirect',
