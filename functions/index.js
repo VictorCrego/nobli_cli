@@ -26,10 +26,20 @@ exports.createNewUser = functions.auth.user().onCreate(async (user) => {
     const email = user.email;
     const id = user.uid;
 
-    console.log("Started writing into firestore...")
-    await admin.firestore().collection("userData").doc(id).set({
-        name: name || "Johnson & Johnson",
+    console.log("Started writing into firestore's userProfileData...")
+    await admin.firestore().collection("userProfileData").doc(id).set({
+        name: name,
         email: email
+    }, 
+    {
+        merge: true
+    });
+
+    console.log("Started writing into firestore's userFinData...")
+    await admin.firestore().collection("userFinData").doc(id).set({
+        balance: 0,
+        last_credit_purchase: null,
+        last_transaction: null
     }, 
     {
         merge: true

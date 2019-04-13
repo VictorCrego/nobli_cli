@@ -110,7 +110,7 @@ export default {
                     });
                     
                     
-                    db.collection("userData").doc(user_id).set({
+                    db.collection("userProfileData").doc(user_id).set({
                       name: name,
                       doc: doc,
                       pcode: pcode,
