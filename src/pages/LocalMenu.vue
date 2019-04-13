@@ -35,10 +35,10 @@
 
   <!-- sub-routes get injected here: -->
   <q-page-container>
-    <div @click="clickShowFestas">
+    <div @click="clickShowEvents">
       <img class="q-pa-md" src="../assets/showfestas.png">
     </div>
-    <div @click="clickBaresRestaurantes">
+    <div @click="clickBarsRestaurants">
       <img class="q-pa-md" src="../assets/baresrestaurantes.png">
     </div>
   </q-page-container>
@@ -79,20 +79,19 @@
 
 <script>
 export default {
-  name: 'PageQrCode',
+  name: 'PageLocalMenu',
   data: function() {
     return {
       showLeft: false
     }
   },
   methods:{
-    clickShowFestas() {
+    clickShowEvents() {
        window.location.href = "/#/";
     },
-    clickBaresRestaurantes() {
+    clickBarsRestaurants() {
        window.location.href = "/#/";
     },
-
     signOut: function(){
       firebase.auth().signOut();
       firebase.app().delete();
@@ -101,7 +100,7 @@ export default {
   created(){
     firebase.auth().onAuthStateChanged(function(user){
       if(!user){
-        //window.location.href = "/#/";
+        window.location.href = "/#/";
       }
     });
   }

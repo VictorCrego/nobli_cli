@@ -42,7 +42,7 @@
   <!-- Footer -->
   <q-layout-footer class="no-shadow">
     <q-toolbar-title class="q-pa-md row justify-center">
-      <q-btn flat size="45pt" dense icon="mdi-map-marker" class="no-shadow" color="deep-purple-10"/>
+      <q-btn flat size="45pt" dense icon="mdi-map-marker" class="no-shadow" color="deep-purple-10" to="LocalMenu"/>
     </q-toolbar-title>
   </q-layout-footer>
 </q-layout>
