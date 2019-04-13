@@ -42,8 +42,9 @@ export default {
 
         }).then(function (user){
             if(user == null) return;
+            window.location.href="/#/QrCodeScreen";
 
-            if(user.isNewUser){
+            /* if(user.isNewUser){
                 var db = firebase.firestore();
                 var user_id = user.uid;
                 var email = user.email;
@@ -63,7 +64,7 @@ export default {
                 });
             }else{
                 window.location.href = "/#/QrCodeScreen";
-            }
+            } */
         });
   },
   methods: {

@@ -13,7 +13,7 @@
                 <br>
                 <q-input v-model="doc" type="number" inverted-light color="white" float-label="CPF" />
                 <br>
-                <q-input v-model="pcode" type="number" inverted-light color="white" float-label="CEP" />
+                <q-input v-model="pcode" inverted-light color="white" float-label="CEP" />
                 <br>
                 <q-input v-model="state" inverted-light color="white" float-label="Estado" />
                 <br>
@@ -101,9 +101,14 @@ export default {
 
               firebase.auth().createUserWithEmailAndPassword(email, password).then(function(){
 
-                firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
-                    var user = firebase.auth().currentUser;
+                firebase.auth().signInWithEmailAndPassword(email, password).then(function(response){
+                    var user = response.user;
                     var user_id = user.uid;
+
+                    user.updateProfile({
+                      displayName: name,
+                    });
+                    
                     
                     db.collection("userData").doc(user_id).set({
                       name: name,
