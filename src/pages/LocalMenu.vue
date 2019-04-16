@@ -1,12 +1,12 @@
 <template>
-<q-layout view="hHr lpr lFf" class="page row items-center justify-center">
+<q-layout view="hHr lPr lFf" class="page row justify-center">
   <q-layout-header class="no-shadow q-pa-lg">
     <q-toolbar color="#D9D9D9">
-      <q-btn flat round dense @click="showLeft = !showLeft" icon="menu" color="grey-8"/>
-      <q-toolbar-title class="q-pa-md row absolute-center">
-        <img alt="Quasar logo" src="~assets/nobli-logo-mini.png">
+      <q-toolbar-title>
+        <q-btn size="15pt" class="absolute-left" flat round dense @click="showLeft = !showLeft" icon="menu" color="grey-10"/>
+        <img class="absolute-center" alt="Quasar logo" src="~assets/nobli-logo-mini.png">
+        <q-btn size="15pt" class="absolute-right" flat round dense @click="signOut" icon="logout" color="grey-10"/>
       </q-toolbar-title>
-      <q-btn class="absolute-right" flat round dense @click="signOut" icon="logout" color="grey-8"/>
     </q-toolbar>
   </q-layout-header>
 
@@ -35,33 +35,24 @@
 
   <!-- sub-routes get injected here: -->
   <q-page-container>
-    <div @click="clickShowEvents">
-      <img class="q-pa-md" src="../assets/showfestas.png">
-    </div>
-    <div @click="clickBarsRestaurants">
-      <img class="q-pa-md" src="../assets/baresrestaurantes.png">
+    <div class="justify-center">
+      <div @click="clickShowEvents">
+        <img class="q-pa-md" src="../assets/showfestas.png">
+      </div>
+      <div @click="clickBarsRestaurants">
+        <img class="q-pa-md" src="../assets/baresrestaurantes.png">
+      </div>
     </div>
   </q-page-container>
 
   <!-- Footer -->
   <q-layout-footer class="no-shadow">
-    
-    <q-toolbar-title class="row items-center justify-center">
-
-      <div class="q-ml-md fixed-bottom-left column">
-        <q-btn flat size="15pt" dense icon="mdi-home" class="no-shadow" color="secondary" to='QrCodeScreen'/>
-        <p class="ButtonTitle" align="center">Início</p>
-      </div>
-
-      <q-btn size="45pt" dense icon="mdi-qrcode-scan" class="no-shadow" to=''/>
-
-      <div class="q-mr-md fixed-bottom-right column">
-        <q-btn disable flat size="15pt" dense icon="mdi-map-marker" class="no-shadow" color="light" to=''/>
-        <p class="ButtonTitle" align="center">Local</p>
-      </div>
-
-    </q-toolbar-title>
-
+      <q-toolbar color="light">
+          <q-toolbar-title>
+              <q-btn flat size="15pt" dense icon="mdi-home" class="no-shadow float-left" color="green-10" to='QrCodeScreen'/>
+              <q-btn flat size="15pt" dense icon="mdi-map-marker" class="no-shadow float-right" color="deep-purple-10" to='LocalMenu'/>
+          </q-toolbar-title>
+      </q-toolbar>
   </q-layout-footer>
 </q-layout>
 </template>
@@ -71,10 +62,6 @@
   .page{
     background-color: #D9D9D9;
   }
-  .ButtonTitle{
-    font-size: 10px;
-  }
-
 </style>
 
 <script>
@@ -87,7 +74,7 @@ export default {
   },
   methods:{
     clickShowEvents() {
-       window.location.href = "/#/";
+       window.location.href = "/#/ShowsEventos";
     },
     clickBarsRestaurants() {
        window.location.href = "/#/";

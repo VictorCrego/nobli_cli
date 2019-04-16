@@ -2,6 +2,7 @@ import IndexPage from 'pages/Index'
 import RegisterPage from 'pages/Register'
 import QrCodeScreen from 'pages/QrCodeScreen'
 import LocalMenuPage from 'pages/LocalMenu'
+import ShowsEventos from 'pages/ShowsEventos'
 import Redirect from 'pages/Redirect'
 
 const routes = [
@@ -24,6 +25,11 @@ const routes = [
     path: '/localmenu',
     name: 'localmenu',
     component: LocalMenuPage
+  },
+  {
+    path: '/showseventos',
+    name: 'showseventos',
+    component: ShowsEventos
   },
   {
     path: '/redirect',
