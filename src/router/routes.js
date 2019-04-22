@@ -3,6 +3,7 @@ import RegisterPage from 'pages/Register'
 import QrCodeScreen from 'pages/QrCodeScreen'
 import LocalMenuPage from 'pages/LocalMenu'
 import ShowsEventos from 'pages/ShowsEventos'
+import BaresRestaurantes from 'pages/BaresRestaurantes'
 import Redirect from 'pages/Redirect'
 
 const routes = [
@@ -30,6 +31,11 @@ const routes = [
     path: '/showseventos',
     name: 'showseventos',
     component: ShowsEventos
+  },
+  {
+    path: '/baresrestaurantes',
+    name: 'baresrestaurantes',
+    component: BaresRestaurantes
   },
   {
     path: '/redirect',

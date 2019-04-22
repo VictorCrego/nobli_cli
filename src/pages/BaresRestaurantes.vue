@@ -4,7 +4,7 @@
     <q-toolbar color="black">
       <q-toolbar-title>
         <q-btn size="15pt" class="absolute-left" flat round dense @click="showLeft = !showLeft" icon="menu" color="grey-5"/>
-        <p class="absolute-center">Shows e Eventos</p>
+        <p class="absolute-center">Bares e Restaurantes</p>
         <q-btn size="15pt" class="absolute-right" flat round dense @click="signOut" icon="logout" color="grey-5"/>
       </q-toolbar-title>
     </q-toolbar>
@@ -42,7 +42,7 @@
                     <img :src="getImgUrl(input.Imagem)">
                 </li>
             </ul>
-            <button @click="addRow('Titulo Imagem', 'showfestas')">Add row</button>
+            <button @click="addRow('Titulo Imagem', 'baresrestaurantes')">Add row</button>
         </div>
     </q-page-container>
 
@@ -79,7 +79,7 @@
 
 <script>
 export default {
-  name: 'PageShowsEventos',
+  name: 'PageBaresRestaurantes',
   data: function() {
     return {
       showLeft: false,
