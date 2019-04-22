@@ -4,6 +4,7 @@ import QrCodeScreen from 'pages/QrCodeScreen'
 import LocalMenuPage from 'pages/LocalMenu'
 import ShowsEventos from 'pages/ShowsEventos'
 import BaresRestaurantes from 'pages/BaresRestaurantes'
+import Cardapio from 'pages/Cardapio'
 import Redirect from 'pages/Redirect'
 
 const routes = [
@@ -36,6 +37,11 @@ const routes = [
     path: '/baresrestaurantes',
     name: 'baresrestaurantes',
     component: BaresRestaurantes
+  },
+  {
+    path: '/cardapio',
+    name: 'cardapio',
+    component: Cardapio
   },
   {
     path: '/redirect',

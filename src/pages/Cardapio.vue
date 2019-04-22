@@ -4,7 +4,7 @@
     <q-toolbar color="black">
       <q-toolbar-title>
         <q-btn size="15pt" class="absolute-left" flat round dense @click="showLeft = !showLeft" icon="menu" color="grey-5"/>
-        <p class="absolute-center">Shows e Eventos</p>
+        <p class="absolute-center">Cardápio</p>
         <q-btn size="15pt" class="absolute-right" flat round dense @click="signOut" icon="logout" color="grey-5"/>
       </q-toolbar-title>
     </q-toolbar>
@@ -35,17 +35,7 @@
 
     <!-- sub-routes get injected here: -->
     <q-page-container>
-        <div class="justify-center">
-            <ul>
-                <li v-for="(input, index) in inputs" :key="index">
-                    <a :href="'/#/Cardapio?value=' + input.Id">                        
-                      <p id="TituloImagem">{{input.TituloImagem}}</p>
-                      <img :src="getImgUrl(input.Imagem)">
-                    </a>
-                </li>
-            </ul>
-            <button @click="addRow('Titulo Imagem', 'showfestas', '152028')">Add row</button>
-        </div>
+
     </q-page-container>
 
     <!-- Footer -->
@@ -61,42 +51,20 @@
 </template>
 
 <style>
-  ul {
-      list-style-type: none;
-      margin:0px;
-      padding-left:0%;
-  }
   .page{
     background-color: #D9D9D9;
-  }
-  #TituloImagem{
-      background-color:rgba(0, 0, 0, 0.7);
-      color: aliceblue;
-      text-align: center;
-      margin: 0px;
-      margin-top: 10px;
-      line-height: 1.8;
   }
 </style>
 
 <script>
 export default {
-  name: 'PageShowsEventos',
+  name: 'PageCardapio',
   data: function() {
     return {
       showLeft: false,
-      inputs: []
     }
   },
   methods:{
-    addRow(Titulo, Imagem, Identificador) {
-      this.inputs.push({TituloImagem: Titulo, Imagem: Imagem, Id: Identificador})
-    },
-    getImgUrl(image) {
-        var images = require.context('../assets/', false, /\.png$/)
-        return images("./" + image + ".png")
-    },
-
     signOut: function(){
       firebase.auth().signOut();
       firebase.app().delete();

@@ -38,11 +38,13 @@
         <div class="justify-center">
             <ul>
                 <li v-for="(input, index) in inputs" :key="index">
-                    <p id="TituloImagem">{{input.TituloImagem}}</p>
-                    <img :src="getImgUrl(input.Imagem)">
+                    <a :href="'/#/Cardapio?value=' + input.Id">                        
+                      <p id="TituloImagem">{{input.TituloImagem}}</p>
+                      <img :src="getImgUrl(input.Imagem)">
+                    </a>
                 </li>
             </ul>
-            <button @click="addRow('Titulo Imagem', 'baresrestaurantes')">Add row</button>
+            <button @click="addRow('Titulo Imagem', 'baresrestaurantes', '152014')">Add row</button>
         </div>
     </q-page-container>
 
@@ -87,8 +89,8 @@ export default {
     }
   },
   methods:{
-    addRow(Titulo, Imagem) {
-      this.inputs.push({TituloImagem: Titulo, Imagem: Imagem})
+    addRow(Titulo, Imagem, Identificador) {
+      this.inputs.push({TituloImagem: Titulo, Imagem: Imagem, Id: Identificador})
     },
     getImgUrl(image) {
         var images = require.context('../assets/', false, /\.png$/)
