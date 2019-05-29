@@ -50,6 +50,9 @@
 
 <script>
 import {firebase, config} from '../plugins/firebaseLoader'
+import PageChanger from '../plugins/PageChanger'
+
+// const PageChangerInst = new PageChanger();
 
 export default {
   name: 'PageIndex',
@@ -70,9 +73,9 @@ export default {
 
     firebase.auth().onAuthStateChanged(function(user){
       if(user == null){
-        window.location.href = "/#/";
+        PageChanger.changeToMainPage();
       }else{
-        window.location.href = "/#/QrCodeScreen";
+        PageChanger.changeToQRCodePage();
       }
     });
   },

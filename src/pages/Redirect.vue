@@ -43,36 +43,12 @@ export default {
         }).then(function (user){
             if(user == null) return;
             window.location.href="/#/QrCodeScreen";
-
-            /* if(user.isNewUser){
-                var db = firebase.firestore();
-                var user_id = user.uid;
-                var email = user.email;
-                var name = user.displayName
-
-                db.collection("userData").doc(user_id).set({
-                    name: name,
-                    email: email
-                }).then(function(){
-                    window.location.href="/#/QrCodeScreen";
-                }).catch(function(error){
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    user.delete();
-                    window.alert(errorCode + " " + errorMessage);
-                    window.location.href = "/#/";
-                });
-            }else{
-                window.location.href = "/#/QrCodeScreen";
-            } */
         });
   },
   methods: {
     logingg: function(event){      
       event.stopPropagation();
       event.preventDefault();
-
-      var target = event.target;
     }
   }
 };

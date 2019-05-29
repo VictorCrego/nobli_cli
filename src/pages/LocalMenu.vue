@@ -77,7 +77,7 @@ export default {
        window.location.href = "/#/ShowsEventos";
     },
     clickBarsRestaurants() {
-       window.location.href = "/#/";
+       window.location.href = "/#/BaresRestaurantes";
     },
     signOut: function(){
       firebase.auth().signOut();

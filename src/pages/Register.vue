@@ -107,8 +107,7 @@ export default {
 
               user.updateProfile({
                 displayName: name,
-              });
-              
+              });              
               
               db.collection("userProfileData").doc(user_id).set({
                 name: name,
