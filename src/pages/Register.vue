@@ -77,76 +77,70 @@ export default {
     });
   },
   methods: {
-    register: function(event){
-            if (this.pwconfirm === this.password){
-              var db = firebase.firestore();
-              var $this = this;
+    register(event){
+      if (this.pwconfirm === this.password){
+        var db = firebase.firestore();
+        var $this = this;
+  
+        event.stopPropagation();
+        event.preventDefault();
         
-              event.stopPropagation();
-              event.preventDefault();
-              
-              var target = event.target;
-              var email = this.email;
-              var password = this.password;
-              var name = this.name;
-              var doc = this.doc;
-              var pcode = this.pcode;
-              var address = this.address;
-              var number = this.number;
-              var address2 = this.address2;
-              var state = this.state;
-              var city = this.city;
+        var target = event.target;
+        var email = this.email;
+        var password = this.password;
+        var name = this.name;
+        var doc = this.doc;
+        var pcode = this.pcode;
+        var address = this.address;
+        var number = this.number;
+        var address2 = this.address2;
+        var state = this.state;
+        var city = this.city;
 
-              target.disabled = true;
+        target.disabled = true;
 
-              firebase.auth().createUserWithEmailAndPassword(email, password).then(function(){
+        firebase.auth().createUserWithEmailAndPassword(email, password).then(function(){
 
-                firebase.auth().signInWithEmailAndPassword(email, password).then(function(response){
-                    var user = response.user;
-                    var user_id = user.uid;
+          firebase.auth().signInWithEmailAndPassword(email, password).then(function(response){
+              var user = response.user;
+              var user_id = user.uid;
 
-                    user.updateProfile({
-                      displayName: name,
-                    });
-                    
-                    
-                    db.collection("userProfileData").doc(user_id).set({
-                      name: name,
-                      doc: doc,
-                      pcode: pcode,
-                      address: address,
-                      number: number,
-                      address2: address2,
-                      state: state,
-                      city: city,
-                      email: email
-                    }).catch(function(error){
-                      var errorCode = error.code;
-                      var errorMessage = error.message;
-                      
-                      user.delete();
-                      target.disabled = false;
-                      
-                      window.alert("Error " + errorCode + " \n" + errorMessage + "\nSou eu!");
-                    });
-                  }).catch(function(error) {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                        
-                    user.delete();
-                    target.disabled = false;
-
-                    window.alert("Error " + errorCode + " \n" + errorMessage + "\nSou eu de baixo!");
-                  });
-              }).catch(function(error) {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-
-                target.disabled = false;
-
-                window.alert("Error " + errorCode + " \n" + errorMessage);
+              user.updateProfile({
+                displayName: name,
               });
-            }
+              
+              
+              db.collection("userProfileData").doc(user_id).set({
+                name: name,
+                doc: doc,
+                pcode: pcode,
+                address: address,
+                number: number,
+                address2: address2,
+                state: state,
+                city: city,
+                email: email
+              }).catch(function(error){
+                handleRegistrationErrorAfterUserCreation(error);
+              });
+            }).catch(function(error) {
+              handleRegistrationErrorAfterUserCreation(error);
+            });
+        }).catch(function(error) {
+          handleRegistrationErrorBeforeUserCreation(error);
+        });
+      }
+    },  
+    handleRegistrationErrorAfterUserCreation(error){     
+      user.delete();
+      handleRegistrationErrorBeforeUserCreation(error);
+    },
+    handleRegistrationErrorBeforeUserCreation(error){
+      var errorCode = error.code;
+      var errorMessage = error.message;
+
+      target.disabled = false;      
+      window.alert("Error " + errorCode + " \n" + errorMessage);
     }
   }
 }
