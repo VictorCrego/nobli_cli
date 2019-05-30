@@ -80,6 +80,9 @@
 </style>
 
 <script>
+import PageChanger from '../plugins/PageChanger'
+
+
 export default {
   name: 'PageBaresRestaurantes',
   data: function() {
@@ -103,9 +106,11 @@ export default {
     }
   },
   created(){
+    var PageChangerInst = new PageChanger(this);
+
     firebase.auth().onAuthStateChanged(function(user){
       if(!user){
-        window.location.href = "/#/";
+        PageChangerInst.changeToMainPage();
       }
     });
   },

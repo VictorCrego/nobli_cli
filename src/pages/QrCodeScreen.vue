@@ -42,7 +42,7 @@
   <!-- Footer -->
   <q-layout-footer class="no-shadow">
     <q-toolbar-title class="q-pa-md row justify-center">
-      <q-btn flat size="45pt" dense icon="mdi-map-marker" class="no-shadow" color="deep-purple-10" to="LocalMenu"/>
+      <q-btn flat size="45pt" dense icon="mdi-map-marker" class="no-shadow" color="deep-purple-10" @click="clickGoToLocalMenuPage()"/>
     </q-toolbar-title>
   </q-layout-footer>
 </q-layout>
@@ -61,6 +61,8 @@
 </style>
 
 <script>
+import PageChanger from '../plugins/PageChanger'
+
 export default {
   name: 'PageQrCode',
   data: function() {
@@ -69,6 +71,9 @@ export default {
     }
   },
   methods:{
+    clickGoToLocalMenuPage(){
+      new PageChanger(this).changeToLocalMenuPage();
+    },
     signOut: function(){
       firebase.auth().signOut();
       firebase.app().delete();
@@ -77,7 +82,7 @@ export default {
   created(){
     firebase.auth().onAuthStateChanged(function(user){
       if(!user){
-        window.location.href = "/#/";
+        PageChanger.changeToMainPage();
       }
     });
   }

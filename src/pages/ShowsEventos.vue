@@ -52,8 +52,8 @@
     <q-layout-footer class="no-shadow">
         <q-toolbar color="light">
             <q-toolbar-title>
-                <q-btn flat size="15pt" dense icon="mdi-home" class="no-shadow float-left" color="green-10" to='QrCodeScreen'/>
-                <q-btn flat size="15pt" dense icon="mdi-map-marker" class="no-shadow float-right" color="deep-purple-10" to='LocalMenu'/>
+                <q-btn flat size="15pt" dense icon="mdi-home" class="no-shadow float-left" color="green-10" @click="clickGoToHomePage()"/>
+                <q-btn flat size="15pt" dense icon="mdi-map-marker" class="no-shadow float-right" color="deep-purple-10" @click="clickGoToLocalMenuPage()"/>
             </q-toolbar-title>
         </q-toolbar>
     </q-layout-footer>
@@ -80,6 +80,8 @@
 </style>
 
 <script>
+import PageChanger from '../plugins/PageChanger'
+
 export default {
   name: 'PageShowsEventos',
   data: function() {
@@ -89,6 +91,12 @@ export default {
     }
   },
   methods:{
+    clickGoToHomePage(){
+      new PageChanger(this).changeToQRCodePage();
+    },
+    clickGoToLocalMenuPage() {
+      new PageChanger(this).changeToLocalMenuPage();
+    },
     addRow(Titulo, Imagem, Identificador) {
       this.inputs.push({TituloImagem: Titulo, Imagem: Imagem, Id: Identificador})
     },
@@ -103,9 +111,11 @@ export default {
     }
   },
   created(){
+    const PageChangerInst = new PageChanger(this);
+    
     firebase.auth().onAuthStateChanged(function(user){
       if(!user){
-        window.location.href = "/#/";
+        PageChangerInst.changeToMainPage();
       }
     });
   },

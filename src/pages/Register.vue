@@ -48,6 +48,8 @@
 <script>
 var today = new Date();
 import { required, email } from 'vuelidate/lib/validators'
+import PageChanger from '../plugins/PageChanger'
+
 export default {
   name: 'PageRegister',
   data: function() {
@@ -72,7 +74,7 @@ export default {
   mounted: function(){
     firebase.auth().onAuthStateChanged(function(user){
         if(user){
-          window.location.href = "/#/QrCodeScreen";
+          PageChanger.changeToQRCodePage();
         }
     });
   },
@@ -120,21 +122,21 @@ export default {
                 city: city,
                 email: email
               }).catch(function(error){
-                handleRegistrationErrorAfterUserCreation(error);
+                $this.handleRegistrationErrorAfterUserCreation(error, target);
               });
             }).catch(function(error) {
-              handleRegistrationErrorAfterUserCreation(error);
+              $this.handleRegistrationErrorAfterUserCreation(error, target);
             });
         }).catch(function(error) {
-          handleRegistrationErrorBeforeUserCreation(error);
+          $this.handleRegistrationErrorBeforeUserCreation(error, target);
         });
       }
     },  
-    handleRegistrationErrorAfterUserCreation(error){     
+    handleRegistrationErrorAfterUserCreation(error, target){     
       user.delete();
-      handleRegistrationErrorBeforeUserCreation(error);
+      this.handleRegistrationErrorBeforeUserCreation(error, target);
     },
-    handleRegistrationErrorBeforeUserCreation(error){
+    handleRegistrationErrorBeforeUserCreation(error, target){
       var errorCode = error.code;
       var errorMessage = error.message;
 

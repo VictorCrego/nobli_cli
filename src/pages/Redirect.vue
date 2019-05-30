@@ -15,6 +15,8 @@
 </style>
 
 <script>
+import PageChanger from '../plugins/PageChanger'
+
 export default {
   name: 'PageRedirect',
   data: function() {
@@ -28,6 +30,7 @@ export default {
   },
   mounted(){
         var db = firebase.firestore();
+        var PageChangerInst = new PageChanger(this)
 
         firebase.auth().getRedirectResult().then(function(result) {
             var user = result.user;
@@ -42,7 +45,7 @@ export default {
 
         }).then(function (user){
             if(user == null) return;
-            window.location.href="/#/QrCodeScreen";
+            PageChangerInst.changeToQRCodePage();
         });
   },
   methods: {

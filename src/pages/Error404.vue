@@ -10,13 +10,21 @@
     <q-btn
       color="secondary"
       style="width:200px;"
-      @click="$router.push('/QrCodeScreen')"
+      @click="changeToQRCodePage()"
     >Go back</q-btn>
   </div>
 </template>
 
 <script>
+import PageChanger from '../plugins/PageChanger'
+
+
 export default {
-  name: 'Error404'
+  name: 'Error404',
+  methods: {
+    changeToQRCodePage() {
+      new PageChanger(this).changeToQRCodePage();
+    }
+  }
 }
 </script>

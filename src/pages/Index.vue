@@ -52,8 +52,6 @@
 import {firebase, config} from '../plugins/firebaseLoader'
 import PageChanger from '../plugins/PageChanger'
 
-// const PageChangerInst = new PageChanger();
-
 export default {
   name: 'PageIndex',
   data: function() {
@@ -66,6 +64,7 @@ export default {
     }
   },
   mounted(){
+    var PageChangerInst = new PageChanger(this);
 
     if(!firebase.apps.length){
       firebase.initializeApp(config);
@@ -73,9 +72,9 @@ export default {
 
     firebase.auth().onAuthStateChanged(function(user){
       if(user == null){
-        PageChanger.changeToMainPage();
+        PageChangerInst.changeToMainPage();
       }else{
-        PageChanger.changeToQRCodePage();
+        PageChangerInst.changeToQRCodePage();
       }
     });
   },
@@ -92,7 +91,7 @@ export default {
       target.disabled = true;
 
       firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
-        window.location.href = "/#/QrCodeScreen";
+        new PageChanger(this).changeToQRCodePage();
       }).catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -101,7 +100,7 @@ export default {
       });
     },
     logingg: function(event){
-        window.location.href = "/#/Redirect";
+      new PageChanger(this).changeToRedirectPage();
     }
   }
 };

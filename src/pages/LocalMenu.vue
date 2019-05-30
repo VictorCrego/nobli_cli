@@ -49,8 +49,7 @@
   <q-layout-footer class="no-shadow">
       <q-toolbar color="light">
           <q-toolbar-title>
-              <q-btn flat size="15pt" dense icon="mdi-home" class="no-shadow float-left" color="green-10" to='QrCodeScreen'/>
-              <q-btn flat size="15pt" dense icon="mdi-map-marker" class="no-shadow float-right" color="deep-purple-10" to='LocalMenu'/>
+              <q-btn flat size="15pt" dense icon="mdi-home" class="no-shadow float-left" color="green-10" @click='clickGoToHomePage()'/>
           </q-toolbar-title>
       </q-toolbar>
   </q-layout-footer>
@@ -65,6 +64,8 @@
 </style>
 
 <script>
+import PageChanger from '../plugins/PageChanger'
+
 export default {
   name: 'PageLocalMenu',
   data: function() {
@@ -73,11 +74,14 @@ export default {
     }
   },
   methods:{
+    clickGoToHomePage(){
+      new PageChanger(this).changeToQRCodePage();
+    },
     clickShowEvents() {
-       window.location.href = "/#/ShowsEventos";
+      new PageChanger(this).changeToShowsAndEvents();
     },
     clickBarsRestaurants() {
-       window.location.href = "/#/BaresRestaurantes";
+      new PageChanger(this).changeToBarsAndRestaurantsPage();
     },
     signOut: function(){
       firebase.auth().signOut();
@@ -87,7 +91,7 @@ export default {
   created(){
     firebase.auth().onAuthStateChanged(function(user){
       if(!user){
-        window.location.href = "/#/";
+        new PageChanger(this).changeToMainPage();
       }
     });
   }
